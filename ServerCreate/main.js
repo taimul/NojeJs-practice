@@ -1,21 +1,21 @@
 var http=require('http');
+var URL=require('url');
+
 
 var server=http.createServer(function (req,res) {
-    if(req.url=="/"){
-        res.writeHead(200,{'Content-type':'text/html'})
-        res.write('<h1>This is Home Page</h1>')
-        res.end();
-    }
-    else if(req.url=="/about"){
-        res.writeHead(200,{'Content-type':'text/html'})
-        res.write('<h1>This is About Page</h1>')
-        res.end();
-    }
-    else if(req.url=="/product"){
-        res.writeHead(200,{'Content-type':'text/html'})
-        res.write('<h1>This is Product Page</h1>')
-        res.end();
-    }
+
+    var myURL="http://taimul.com/blog.html?year=2021&month=march";
+
+    var myURLObj= URL.parse(myURL,true);
+
+    var myHostName=myURLObj.host;
+    var myPathname=myURLObj.pathname;
+    var mySearchName=myURLObj.search;
+
+    res.writeHead(200,{'Content-Type':'text/html'})
+    res.write(myHostName);
+    res.end();
+
 });
 
 server.listen(5050);
